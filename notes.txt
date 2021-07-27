@@ -1,0 +1,77 @@
+notes.txt
+
+justin212k@ip-10-61-11-160:/Data_500/Cubi_Chesnel_EPAN12_0120/plate2$ stitch_reads.sh 
+
+etc.
+
+duplicates exist, beware:
+
+justin212k@ip-10-61-11-160:/Data_500/Cubi_Chesnel_EPAN12_0120/repeatsamples$ 'ls' | xargs -I {} -n 1 find .. -iname {}
+../repeatsamples/Sample_CBBM1
+../repeatsamples/Sample_CUB2BM6
+../repeatsamples/Sample_CUB2D15M10
+../plate2/Sample_CUB2D15M10
+../repeatsamples/Sample_CUB2D15M7
+../plate1/Sample_CUB2D15M7
+../repeatsamples/Sample_CUB2D5M9
+../plate1/Sample_CUB2D5M9
+../repeatsamples/Sample_GEND10M24
+../repeatsamples/Sample_METD10M13
+../plate1/Sample_METD10M13
+../repeatsamples/Sample_METD5M12
+../repeatsamples/Sample_METD5M14
+../plate1/Sample_METD5M14
+
+changed ntc to ntc1, ntc2 for each plate.
+
+cat hi.txt | sort | uniq -c
+yields 2 ntc and dupes of:
+
+CUB2D15M10 plate 2
+CUB2D15M7 1
+CUB2D5M9 1
+METD10M13 1
+METD5M14 1
+
+all of which have one copy in repeat samples
+
+made special samname_to_bc.txt for repeatsamples samples, those were using the old sample names
+
+remove fails from data
+CUB2D0M6_splat.fna
+CUB2D15M10_splat.fna
+CUB2D15M7_splat.fna
+CUB2D5M9_splat.fna
+METD10M13_splat.fna
+METD5M14_splat.fna
+
+justin212k@ip-10-61-11-160:/Data_500/Cubi_Chesnel_EPAN12_0120$ 'ls' -R | grep splat | grep -v barcode_errors | sort | uniq -c | sort
+yields
+...
+     1 VAND5M20_splat.fna
+      2 CUB2D0M6_splat.fna
+      2 CUB2D15M10_splat.fna
+      2 CUB2D15M7_splat.fna
+      2 CUB2D5M9_splat.fna
+      2 GENTD10M24_splat.fna
+      2 METD10M13_splat.fna
+      2 METD5M14_splat.fna
+
+those 7 samples put in originals_of_repeated_samples/
+
+additionally, METD5M12 and CB315D0M1 have no originals, but are in repeated samples
+
+
+justin212k@ip-10-61-11-160:/Data_500/Cubi_Chesnel_EPAN12_0120$ cat plate1/seqs.trim.fna plate2/seqs.trim.fna repeatsamples/seqs.trim.fna > combined_plates_and_repeats/seqs.trim.fna
+
+from in combined_plates_and_repeats, make_otu_table.sh
+
+Seqs/sample detail:
+ VAND15M19: 562.0
+ GENTD5M22: 1788.0
+ VAND10M18: 8907.0
+ GENTD5M23: 31345.0
+
+...
+
+remove top 3 
