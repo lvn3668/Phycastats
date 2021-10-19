@@ -180,7 +180,7 @@ doMantel <- FALSE
 doAdonis <- T
 doAdonisPairs <- F
 
-
+# Mantel and Adonis significance tests performed after data normalization (followed by plotting interactive tree of life)
 # params used for bioenv and mantel only
 # The dissimilarity index used for community data in 'vegdist'
 distIndex <- "bray" # possible values (specified in the appropriate
